@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menu | Khobzeh w Zaitoneh Abu Dhabi</title>
+    <meta
+      name="description"
+      content="Browse the current Khobzeh w Zaitoneh menu for Palestinian breakfast trays, mezze, pastries, daily dishes, sweets, drinks, and retail pantry items in Abu Dhabi."
+    />
+    <meta property="og:title" content="Menu | Khobzeh w Zaitoneh Abu Dhabi" />
+    <meta property="og:description" content="A mobile-friendly digital menu for Khobzeh w Zaitoneh, Palestinian restaurant in Abu Dhabi." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/images/menu-background.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Menu",
+        "name": "Khobzeh w Zaitoneh Menu",
+        "inLanguage": ["en", "ar"],
+        "hasMenuSection": [
+          { "@type": "MenuSection", "name": "Breakfast Tray" },
+          { "@type": "MenuSection", "name": "Cold Appetizer" },
+          { "@type": "MenuSection", "name": "Mana'esh" },
+          { "@type": "MenuSection", "name": "Daily Dish" },
+          { "@type": "MenuSection", "name": "Sweets" },
+          { "@type": "MenuSection", "name": "Hot Beverages" }
+        ]
+      }
+    </script>
+  </head>
+  <body class="menu-page">
+    <a class="skip-link" href="#menuContent">Skip to menu</a>
+
+    <header class="menu-header">
+      <div class="menu-header-bg" aria-hidden="true"></div>
+      <div class="menu-header-inner">
+        <a class="brand-lockup menu-brand" href="index.html" aria-label="Back to Khobzeh w Zaitoneh website">
+          <img src="assets/images/logo.jpg" alt="Khobzeh w Zaitoneh Arabic logo" />
+          <span>
+            <strong>Khobzeh w Zaitoneh</strong>
+            <small lang="ar" dir="rtl">خبزة و زيتونة</small>
+          </span>
+        </a>
+        <div class="menu-title-block">
+          <p class="eyebrow">Digital Menu</p>
+          <h1>From our oven to your table</h1>
+          <p>
+            Palestinian dishes, warm bread, olive oil, pastries, daily plates, sweets, and drinks. Prices are listed in AED from the verified FineDine menu source.
+          </p>
+        </div>
+        <div class="menu-header-actions">
+          <a class="btn btn-light" href="index.html">Back to Website</a>
+          <a class="btn btn-outline-light" href="https://www.instagram.com/khobzehwzaitoneh/" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn btn-outline-light" href="https://maps.app.goo.gl/xRNT1w5RNDVHsaGbA" target="_blank" rel="noopener">Get Directions</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="menuContent">
+      <section class="menu-tools" aria-label="Menu search and categories">
+        <label class="search-wrap" for="menuSearch">
+          <span>Search dishes</span>
+          <input type="search" id="menuSearch" placeholder="Search dishes, Arabic names, descriptions, or categories..." autocomplete="off" />
+        </label>
+        <nav class="category-nav" id="categoryNav" aria-label="Menu categories"></nav>
+      </section>
+
+      <section class="signature-section" aria-labelledby="signatureTitle">
+        <div class="section-intro section-intro-wide">
+          <p class="eyebrow">Signature Palestinian Favourites</p>
+          <h2 id="signatureTitle">Start here if you are choosing quickly</h2>
+          <p>Selected from current menu items such as mansaf, musakhan, zaatar, breakfast trays, mezze, and Palestinian olive oil.</p>
+        </div>
+        <div class="signature-grid" id="signatureGrid"></div>
+      </section>
+
+      <section class="full-menu-section" aria-labelledby="fullMenuTitle">
+        <div class="menu-count-row">
+          <div>
+            <p class="eyebrow">Full Menu</p>
+            <h2 id="fullMenuTitle">Browse by category</h2>
+          </div>
+          <p id="menuCount" aria-live="polite"></p>
+        </div>
+        <div id="menuSections" class="menu-sections"></div>
+        <p class="no-results" id="noResults" hidden>No menu items match your search.</p>
+        <noscript>
+          <p class="no-results">JavaScript is required to display the full static menu dataset on this page.</p>
+        </noscript>
+      </section>
+    </main>
+
+    <footer class="site-footer menu-footer">
+      <div>
+        <strong>Khobzeh w Zaitoneh</strong>
+        <span lang="ar" dir="rtl">خبزة و زيتونة</span>
+      </div>
+      <nav aria-label="Menu footer navigation">
+        <a href="index.html">Website</a>
+        <a href="https://www.instagram.com/khobzehwzaitoneh/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://maps.app.goo.gl/xRNT1w5RNDVHsaGbA" target="_blank" rel="noopener">Google Maps</a>
+        <a href="tel:+971503089440">+971 50 308 9440</a>
+      </nav>
+      <p>
+        Source menu data: FineDine current menu, transformed into a static dataset on July 9, 2026.
+      </p>
+    </footer>
+
+    <script src="assets/data/menu-data.js"></script>
+    <script src="script.js" defer></script>
+  </body>
+</html>
