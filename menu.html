@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap"
       rel="stylesheet"
     />
     <link rel="icon" href="assets/images/logo-cropped.jpg" />
@@ -74,6 +74,51 @@
     </header>
 
     <main id="menuContent">
+      <section class="menu-overview" aria-labelledby="menuOverviewTitle">
+        <div class="menu-overview-heading">
+          <p class="eyebrow">Choose a Menu Path</p>
+          <h2 id="menuOverviewTitle">The Khobzeh menu</h2>
+          <p>Jump into the table section you need, then use search or the sticky category bar to narrow the full menu.</p>
+        </div>
+        <div class="menu-jump-grid" aria-label="Menu section shortcuts">
+          <a class="menu-jump-card" href="#group-morning-table">
+            <img src="assets/dishes/breakfast-tray.jpg" alt="Palestinian breakfast tray" />
+            <span>
+              <strong>Morning Table</strong>
+              <small>Breakfast, mezze, salads, fatteh</small>
+            </span>
+          </a>
+          <a class="menu-jump-card" href="#group-oven-bakery">
+            <img src="assets/images/mushrouha-cheese-oman.jpg" alt="Fresh baked mashrouha pastry" />
+            <span>
+              <strong>Oven & Bakery</strong>
+              <small>Mana'esh, mashrouha, ka'ak, pizza</small>
+            </span>
+          </a>
+          <a class="menu-jump-card" href="#group-mains-pottery">
+            <img src="https://media.finedinemenu.com/paD9-md-v/321141b3-117f-4c53-ab15-084f5d7ee022.jpeg" alt="Mansaf from the current menu" />
+            <span>
+              <strong>Mains & Kids</strong>
+              <small>Daily dishes, pottery, hot plates</small>
+            </span>
+          </a>
+          <a class="menu-jump-card" href="#group-sweets-drinks">
+            <img src="assets/video-frames/menu-dish-01.jpg" alt="Restaurant drink and table detail" />
+            <span>
+              <strong>Sweets & Drinks</strong>
+              <small>Desserts, coffee, juices, mojitos</small>
+            </span>
+          </a>
+          <a class="menu-jump-card" href="#group-shisha-retail">
+            <img src="assets/video-frames/gallery-detail-01.jpg" alt="Palestinian pantry and interior detail" />
+            <span>
+              <strong>Shisha & Retail</strong>
+              <small>Shisha and pantry items</small>
+            </span>
+          </a>
+        </div>
+      </section>
+
       <section class="menu-tools" aria-label="Menu search and categories">
         <label class="search-wrap" for="menuSearch">
           <span>Search dishes</span>
@@ -108,19 +153,28 @@
     </main>
 
     <footer class="site-footer menu-footer">
-      <div>
-        <strong>Khobzeh w Zaitoneh</strong>
-        <span lang="ar" dir="rtl">خبزة و زيتونة</span>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/images/logo-cropped.jpg" alt="Khobzeh w Zaitoneh Arabic logo" />
+          <strong>Khobzeh w Zaitoneh</strong>
+          <span lang="ar" dir="rtl">خبزة و زيتونة</span>
+          <p>Digital menu for Palestinian breakfast trays, mezze, pastries, daily dishes, sweets, drinks, shisha, and pantry items.</p>
+        </div>
+        <nav aria-label="Menu footer navigation">
+          <h2>Website</h2>
+          <a href="index.html">Main Website</a>
+          <a href="#menuContent">Menu Top</a>
+          <a href="https://www.instagram.com/khobzehwzaitoneh/" target="_blank" rel="noopener">Instagram</a>
+        </nav>
+        <nav aria-label="Menu footer directions">
+          <h2>Directions</h2>
+          <a href="https://maps.app.goo.gl/xRNT1w5RNDVHsaGbA" target="_blank" rel="noopener">Google Maps</a>
+          <a href="https://maps.apple.com/?q=Khobzeh%20w%20Zaitoneh&amp;ll=24.5065203,54.4094323" target="_blank" rel="noopener">Apple Maps</a>
+          <a href="https://waze.com/ul?ll=24.5065203%2C54.4094323&amp;navigate=yes&amp;zoom=17" target="_blank" rel="noopener">Waze</a>
+          <a href="tel:+971503089440">+971 50 308 9440</a>
+        </nav>
       </div>
-      <nav aria-label="Menu footer navigation">
-        <a href="index.html">Website</a>
-        <a href="https://www.instagram.com/khobzehwzaitoneh/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://maps.app.goo.gl/xRNT1w5RNDVHsaGbA" target="_blank" rel="noopener">Google Maps</a>
-        <a href="tel:+971503089440">+971 50 308 9440</a>
-      </nav>
-      <p>
-        Source menu data: FineDine current menu, transformed into a static dataset on July 9, 2026.
-      </p>
+      <p class="footer-bottom">Source menu data: FineDine current menu, transformed into a static dataset on July 9, 2026.</p>
     </footer>
 
     <script src="assets/data/menu-data.js"></script>
