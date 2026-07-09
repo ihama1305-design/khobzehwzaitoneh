@@ -33,6 +33,22 @@ Live GitHub Pages site:
 https://ihama1305-design.github.io/khobzehwzaitoneh/
 ```
 
+Design reference links:
+
+```text
+Sla Cafe:
+https://slacafe.com/
+
+OLA Brasil UAE menu:
+https://olabrasiluae.com/menu/
+
+Otantik UAE:
+https://otantik.ae/
+
+Arabica UAE:
+https://arabica.ae/
+```
+
 Instagram, Google Maps, and the existing menu are the preferred sources for:
 
 - Restaurant identity
@@ -43,6 +59,8 @@ Instagram, Google Maps, and the existing menu are the preferred sources for:
 - Reviews
 - Address
 - Contact information
+
+The design reference links are inspiration only. Do not copy branding, layout, images, text, icons, or proprietary content from those websites. Use them to understand the expected quality level, spacing, dark textured sections, strong typography, organized location/contact sections, and polished menu navigation patterns.
 
 Do not invent missing details. If a price, review, photo, opening time, address detail, or contact detail cannot be verified, leave a `TODO` comment or placeholder instead.
 
@@ -75,7 +93,15 @@ Current requested palette direction:
 - Olive green
 - White / warm white
 - Dark grey / charcoal
-- Subtle gold or terracotta accents only when needed
+- Subtle gold, terracotta, clay, muted burgundy, copper, or stone accents only when needed
+
+Important latest theme direction:
+
+- Do not overuse the muted gold/yellow accent.
+- Use stronger contrast and more color variation while staying classy and restaurant-appropriate.
+- Keep the look royal, warm, and premium rather than dull, flat, orange-heavy, or beige-heavy.
+- Dark green, charcoal, warm white, olive, muted clay, stone, copper, and deep burgundy accents are preferred over repeated gold.
+- Menu and category controls should feel refined and visual, not generic form controls.
 
 Suggested palette:
 
@@ -117,8 +143,8 @@ The homepage should contain:
 3. Story section
 4. Featured dishes carousel
 5. Gallery section
-6. Reviews / testimonials section
-7. Visit us / location section
+6. Visit us / location section
+7. Reviews / testimonials section
 8. Footer
 
 ## Header
@@ -133,8 +159,8 @@ The header includes:
   - Story
   - Menu
   - Gallery
-  - Reviews
   - Visit Us
+  - Reviews
 - Directions button
 - View Menu button linking to `menu.html`
 
@@ -214,7 +240,7 @@ Important:
 
 ## Reviews
 
-The reviews section should use real Google reviews where possible.
+The reviews section should use real Google reviews where possible and should come **after** the Visit Us / location section near the end of the homepage.
 
 Each review card should include:
 
@@ -236,6 +262,8 @@ The visit/location section should include:
 - Opening hours if verified
 - Phone number if verified
 - Google Maps directions link
+- Apple Maps directions link
+- Waze directions link
 - Instagram link
 - Map embed if available
 
@@ -262,13 +290,32 @@ Menu page requirements:
 - Mobile-first
 - Fast-loading
 - Easy to scan
-- Sticky category bar
+- Sticky category access, but **not** a bulky horizontal top scroller that dominates the page
 - Search works by item name, category, and description
 - Arabic-style framed menu cards
 - Dish photos where available
 - Prices only when verified
 - No fake menu data
 - Optimized for QR-code use inside the restaurant
+
+Latest menu UX direction:
+
+- Replace the wide horizontal category slider with a more compact, elegant control.
+- Acceptable patterns include a refined dropdown, side drawer, compact floating category button, or visually grouped category panel.
+- Category navigation should not take excessive vertical space at the top of the menu.
+- The menu should be subdivided professionally into clear groups, such as:
+  - Morning Table
+  - Oven & Bakery
+  - Mains & Pottery
+  - Kids Menu
+  - Sweets
+  - Drinks
+  - Shisha
+  - Retail / Pantry
+- Text, Arabic names, descriptions, and prices must align cleanly inside cards.
+- Prices must never spill outside boxes.
+- Cards should be compact enough that the menu does not feel unnecessarily long.
+- Fonts should feel bold, polished, and restaurant-grade, not basic or scrambled.
 
 # 6. Arabic-Style Frame Requirement
 
@@ -328,6 +375,7 @@ Recommended folder structure:
 assets/video/
 assets/video-frames/
 assets/dishes/
+assets/menu-items/
 assets/gallery/
 assets/story/
 assets/reviews/
@@ -345,6 +393,16 @@ Use the first video as:
 
 - Homepage hero video, or
 - Presentation video near the top of the homepage
+
+Hero video requirements:
+
+- Autoplay should be attempted on all devices using muted, looped, `playsinline` video.
+- Mobile Safari and Instagram in-app browser may still block autoplay in Low Power Mode or data-saver conditions; keep a poster fallback.
+- Do not hide the video on mobile unless absolutely necessary.
+- Desktop framing should show the person/subject clearly and should not feel overly zoomed out.
+- Mobile framing may be slightly zoomed out to show more detail, but desktop should preserve the focal subject.
+- Use responsive `object-position` and `object-fit` rules for desktop, tablet, and mobile.
+- The video should feel smooth and immersive, similar in quality to premium cafe/restaurant sites such as Arabica or Sla Cafe, without copying their assets.
 
 Use the second video to extract still frames for:
 
@@ -374,6 +432,19 @@ Important image rules:
 - Prefer `.webp` for compressed assets.
 - Use descriptive file names.
 - Add alt text.
+- Every visible dish, signature, carousel, and menu card should show a real image whenever a verified image exists.
+- No card should render as an empty white box or show only broken-image alt text.
+- Do not rely on remote hotlinked menu images at runtime if they fail to load in the browser.
+- FineDine media URLs may return `413 TooLargeImageException` or fail when hotlinked. Prefer downloading verified source images, resizing/compressing them, and serving them locally from `assets/menu-items/` or `assets/dishes/`.
+- If a specific dish image cannot be obtained, use a clearly related verified restaurant image as a temporary fallback and leave a `TODO` to replace it with the exact dish photo.
+- Use `loading="lazy"` for non-critical images.
+- Keep image aspect ratios stable so cards do not jump or collapse while loading.
+
+Current critical image issue:
+
+- Some menu and featured dish cards currently show broken image alt text instead of photos.
+- This must be treated as a blocker before launch.
+- The fix should localize/optimize images or add reliable local fallbacks so all cards display clean visuals on desktop, mobile, and in-app browsers.
 
 # 8. JavaScript Functionality
 
@@ -384,9 +455,10 @@ Important image rules:
 - Featured dish carousel arrows
 - Horizontal scroll behavior
 - Menu search/filtering
-- Sticky category interactions
+- Compact menu category interactions, such as dropdown, side drawer, or grouped category selector
 - Review rendering from `data/reviews.json` if used
 - Hover/focus accessibility behavior if needed
+- Hero video autoplay retry for muted `playsinline` video where browser policy allows
 
 The site should remain functional without external libraries.
 
@@ -550,8 +622,31 @@ Reduced motion CSS:
 16. Improve spacing and use more of the page.
 17. Optimize for phone, iPad, laptop, desktop, and large desktop.
 18. Keep the menu page standalone and QR-friendly.
+19. Fix broken dish/menu images across all pages.
+20. Localize reliable dish images instead of depending on failing remote hotlinks.
+21. Replace the bulky horizontal menu category scroller with a compact refined category control.
+22. Improve menu contrast, spacing, typography, and card alignment.
+23. Reduce repeated gold/yellow usage and add more refined color variation.
+24. Adjust desktop hero video crop so the person/subject is clearly visible.
 
-# 14. Developer Rules
+# 14. Latest Active Priorities
+
+These are the newest collaborator notes and should be treated as active priorities:
+
+1. Fix all broken menu, signature, carousel, and dish images.
+2. Do not rely on remote image hotlinks if they fail; localize, compress, and serve images from the repo.
+3. Ensure images appear clearly on every device and do not render as empty boxes or visible alt text.
+4. Improve menu page contrast, hierarchy, and visual richness.
+5. Reduce overuse of gold/yellow accents; add more refined variation using deep green, charcoal, warm white, olive, muted clay, stone, copper, or burgundy.
+6. Replace the large top category scroller with a compact refined category control, such as a dropdown, side drawer, or elegant grouped selector.
+7. Keep menu sections professional and compact, with clear subdivisions such as Kids Menu, Drinks, Sweets, Mains, Oven & Bakery, and Retail.
+8. Fix text alignment in menu cards so English, Arabic, descriptions, and prices stay inside their boxes.
+9. Hero video desktop framing should show the person/subject clearly; the earlier zoomed-out desktop crop is not acceptable.
+10. Hero video mobile framing can remain slightly wider if it helps show more detail.
+11. Use Sla Cafe as a quality reference for dark textured hero/contact sections, strong bold typography, clean white navigation, and organized contact/footer presentation.
+12. Keep the site culturally Palestinian / Levantine and not generic cafe branding.
+
+# 15. Developer Rules
 
 Collaborators should follow these rules:
 
@@ -568,7 +663,7 @@ Collaborators should follow these rules:
 - Keep all external links functional.
 - Keep GitHub Pages compatibility.
 
-# 15. Final QA Checklist
+# 16. Final QA Checklist
 
 ## Final QA Checklist
 
@@ -585,6 +680,7 @@ Collaborators should follow these rules:
 - [ ] Featured dishes appear in a horizontal carousel.
 - [ ] Carousel arrows work.
 - [ ] Carousel works by swipe/trackpad.
+- [ ] Carousel dish images all render correctly.
 - [ ] Dish cards enlarge on hover/focus.
 - [ ] Dish descriptions appear on hover/focus.
 - [ ] Gallery does not include the "Menu identity" image.
@@ -599,6 +695,10 @@ Collaborators should follow these rules:
 - [ ] Website looks good on large desktop.
 - [ ] Menu search works.
 - [ ] Menu category navigation works.
+- [ ] Menu category control is compact and not a bulky horizontal top scroller.
+- [ ] Menu sections are professionally grouped.
+- [ ] Menu card images all render correctly.
+- [ ] Menu card text and prices stay inside card boundaries.
 - [ ] No fake prices are added.
 - [ ] No fake reviews are added.
 - [ ] No broken images.
