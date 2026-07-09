@@ -1,4 +1,36 @@
 (function () {
+  const createImageFallback = () => {
+    const fallback = document.createElement("span");
+    fallback.className = "image-fallback-mark";
+    fallback.lang = "ar";
+    fallback.dir = "rtl";
+    fallback.textContent = "خبزة و زيتونة";
+    fallback.setAttribute("aria-hidden", "true");
+    return fallback;
+  };
+
+  const markImageMissing = (img) => {
+    if (!img || img.dataset.fallbackApplied === "true") return;
+    img.dataset.fallbackApplied = "true";
+
+    const card = img.closest(".menu-item-card, .signature-card, .visual-category-card, .menu-hero-card, .dish-card, .menu-jump-card");
+    card?.classList.add("image-missing", "no-photo");
+
+    const holder = img.closest("figure, .visual-category-media") || img.parentElement;
+    if (holder) {
+      holder.classList.add("is-missing");
+      img.remove();
+      if (!holder.querySelector(".image-fallback-mark")) holder.appendChild(createImageFallback());
+      return;
+    }
+
+    img.remove();
+  };
+
+  document.addEventListener("error", (event) => {
+    if (event.target instanceof HTMLImageElement) markImageMissing(event.target);
+  }, true);
+
   const header = document.querySelector("[data-header]");
   const navToggle = document.querySelector(".nav-toggle");
   const primaryNav = document.querySelector(".primary-nav");
@@ -117,12 +149,13 @@
 
   const sectionContainer = document.getElementById("menuSections");
   const categoryNav = document.getElementById("categoryNav");
+  const visualCategoryStrip = document.getElementById("visualCategoryStrip");
   const signatureGrid = document.getElementById("signatureGrid");
   const searchInput = document.getElementById("menuSearch");
   const menuCount = document.getElementById("menuCount");
   const noResults = document.getElementById("noResults");
 
-  if (!sectionContainer || !categoryNav || !signatureGrid || !searchInput) return;
+  if (!sectionContainer || !categoryNav || !visualCategoryStrip || !signatureGrid || !searchInput) return;
 
   const sections = [...menuData.sections].sort((a, b) => a.order - b.order);
   const sectionById = new Map(sections.map((section) => [section.id, section]));
@@ -130,22 +163,15 @@
   const items = [...menuData.items].sort((a, b) => a.order - b.order || a.name.localeCompare(b.name));
   const mediaBaseUrl = menuData.mediaBaseUrl || "";
   const signatureNames = [
-    "Mansaf",
-    "Chicken Musakhan",
-    "Zaatar",
-    "Hummus",
+    "Mushrouha Cheese and Oman Chips",
+    "Falafel Fattah",
+    "Shrimp Sajeyeh",
+    "Ouzi Surra",
     "Jabel Al Nar Breakfast Tray",
-    "Shrimp Pottery with Vegetables",
-    "Palestinian Olive Oil(500ml)",
-    "Truffle Pizza"
+    "Mermaid Breakfast Tray",
+    "Truffle Pizza",
+    "Palestinian Olive Oil(500ml)"
   ];
-
-  const localImages = new Map([
-    ["jabel al nar breakfast tray", "assets/dishes/breakfast-tray.jpg"],
-    ["falafel fattah", "assets/images/falafel-fatteh.jpg"],
-    ["mushrouha cheese and oman chips", "assets/images/mushrouha-cheese-oman.jpg"],
-    ["truffle pizza", "assets/images/truffle-pizza.jpg"]
-  ]);
 
   const sectionGroups = [
     {
@@ -179,6 +205,8 @@
       sectionNames: ["Shisha", "Retail"]
     }
   ];
+
+  const openSections = new Set(sections[0]?.id ? [sections[0].id] : []);
 
   const normalize = (value) =>
     String(value || "")
@@ -225,14 +253,23 @@
   };
 
   const imageForItem = (item) => {
-    const exact = localImages.get(normalize(item.name));
-    if (exact) return exact;
-    for (const [key, value] of localImages.entries()) {
-      if (normalize(item.name).includes(key)) return value;
-    }
     if (item.image) return imageUrl(item.image);
-    const section = sectionById.get(item.sectionId);
-    if (section?.image) return imageUrl(section.image);
+    return "";
+  };
+
+  const imageForSection = (section) => {
+    if (!section) return "";
+    if (section.image) return imageUrl(section.image);
+    const representativeItem = items.find((item) => item.sectionId === section.id && item.image);
+    return representativeItem ? imageForItem(representativeItem) : "";
+  };
+
+  const imageForGroup = (group) => {
+    for (const sectionName of group.sectionNames) {
+      const section = sectionByName.get(normalizeSectionName(sectionName));
+      const image = imageForSection(section);
+      if (image) return image;
+    }
     return "";
   };
 
@@ -257,6 +294,26 @@
     return haystack.includes(query);
   };
 
+  const createManagedImage = (src, alt, className, width, height) => {
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = alt;
+    img.loading = "lazy";
+    img.decoding = "async";
+    if (className) img.className = className;
+    if (width) img.width = width;
+    if (height) img.height = height;
+    img.addEventListener("error", () => markImageMissing(img), { once: true });
+    return img;
+  };
+
+  const createPhotoFallback = (className = "menu-item-no-photo") => {
+    const fallback = document.createElement("div");
+    fallback.className = className;
+    fallback.appendChild(createImageFallback());
+    return fallback;
+  };
+
   const createItemCard = (item) => {
     const article = document.createElement("article");
     article.className = "menu-item-card arabic-frame";
@@ -270,16 +327,17 @@
     ].join(" ");
 
     const image = imageForItem(item);
+    const figure = document.createElement("figure");
+    figure.className = "menu-item-image";
     if (image) {
-      const figure = document.createElement("figure");
-      figure.className = "menu-item-image";
-      const img = document.createElement("img");
-      img.src = image;
-      img.alt = `${item.name} from Khobzeh w Zaitoneh`;
-      img.loading = "lazy";
+      const img = createManagedImage(image, `${item.name} from Khobzeh w Zaitoneh`, "menu-item-photo", 120, 120);
       figure.appendChild(img);
-      article.appendChild(figure);
+    } else {
+      article.classList.add("no-photo");
+      figure.classList.add("is-missing");
+      figure.appendChild(createPhotoFallback());
     }
+    article.appendChild(figure);
 
     const content = document.createElement("div");
     content.className = "menu-card-content";
@@ -336,11 +394,11 @@
 
     const image = imageForItem(item);
     if (image) {
-      const img = document.createElement("img");
-      img.src = image;
-      img.alt = `${item.name} from Khobzeh w Zaitoneh`;
-      img.loading = "lazy";
+      const img = createManagedImage(image, `${item.name} from Khobzeh w Zaitoneh`, "", 640, 480);
       card.appendChild(img);
+    } else {
+      card.classList.add("no-photo");
+      card.appendChild(createPhotoFallback("signature-no-photo"));
     }
 
     const section = sectionById.get(item.sectionId);
@@ -378,17 +436,32 @@
     return card;
   };
 
+  const openGroupSections = (group) => {
+    group.sectionNames.forEach((sectionName) => {
+      const section = sectionByName.get(normalizeSectionName(sectionName));
+      if (section) openSections.add(section.id);
+    });
+  };
+
+  const scrollToTarget = (targetId) => {
+    requestAnimationFrame(() => {
+      document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
+
   const renderCategoryNav = () => {
     categoryNav.replaceChildren();
     sectionGroups.forEach((group) => {
       const button = document.createElement("button");
       button.type = "button";
-      button.className = "category-group-button";
+      button.className = "category-pill category-group-button";
       button.textContent = group.name;
       button.dataset.target = group.id;
       button.dataset.groupId = group.id;
       button.addEventListener("click", () => {
-        document.getElementById(group.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        openGroupSections(group);
+        renderMenu();
+        scrollToTarget(group.id);
       });
       categoryNav.appendChild(button);
     });
@@ -396,14 +469,95 @@
     sections.forEach((section) => {
       const button = document.createElement("button");
       button.type = "button";
+      button.className = "category-pill";
       button.textContent = section.name;
       button.dataset.target = slugify(section.name);
       button.dataset.sectionId = section.id;
       button.addEventListener("click", () => {
-        document.getElementById(button.dataset.target)?.scrollIntoView({ behavior: "smooth", block: "start" });
+        openSections.add(section.id);
+        renderMenu();
+        scrollToTarget(button.dataset.target);
       });
       categoryNav.appendChild(button);
     });
+  };
+
+  const createVisualCategoryCard = ({ label, arabic, detail, image, targetId, sectionId, group }) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = group ? "visual-category-card visual-category-card-primary" : "visual-category-card";
+    button.dataset.target = targetId;
+    if (sectionId) button.dataset.sectionId = sectionId;
+    if (group) button.dataset.groupId = targetId;
+
+    const media = document.createElement("span");
+    media.className = "visual-category-media";
+    if (image) {
+      media.appendChild(createManagedImage(image, `${label} dishes`, "", 220, 160));
+    } else {
+      button.classList.add("no-photo");
+      media.classList.add("is-missing");
+      media.appendChild(createPhotoFallback("visual-category-no-photo"));
+    }
+
+    const text = document.createElement("span");
+    text.className = "visual-category-text";
+
+    const name = document.createElement("strong");
+    name.textContent = label;
+    text.appendChild(name);
+
+    if (arabic) {
+      const ar = document.createElement("small");
+      ar.className = "arabic-name";
+      ar.lang = "ar";
+      ar.dir = "rtl";
+      ar.textContent = arabic;
+      text.appendChild(ar);
+    } else if (detail) {
+      const small = document.createElement("small");
+      small.textContent = detail;
+      text.appendChild(small);
+    }
+
+    button.append(media, text);
+    button.addEventListener("click", () => {
+      if (group) {
+        openGroupSections(group);
+      } else if (sectionId) {
+        openSections.add(sectionId);
+      }
+      renderMenu();
+      scrollToTarget(targetId);
+    });
+
+    return button;
+  };
+
+  const renderVisualCategories = () => {
+    const cards = [];
+
+    sectionGroups.forEach((group) => {
+      cards.push(createVisualCategoryCard({
+        label: group.name,
+        detail: group.detail,
+        image: imageForGroup(group),
+        targetId: group.id,
+        group
+      }));
+    });
+
+    sections.forEach((section) => {
+      cards.push(createVisualCategoryCard({
+        label: section.name,
+        arabic: section.ar,
+        image: imageForSection(section),
+        targetId: slugify(section.name),
+        sectionId: section.id
+      }));
+    });
+
+    visualCategoryStrip.replaceChildren(...cards);
   };
 
   const renderSignatures = () => {
@@ -413,19 +567,31 @@
         items.find((item) => normalize(item.name).includes(normalize(signature)));
       if (match && !selected.some((item) => item.id === match.id)) selected.push(match);
     });
+
+    items.forEach((item) => {
+      if (selected.length >= 8) return;
+      if (item.image && !selected.some((selectedItem) => selectedItem.id === item.id)) selected.push(item);
+    });
+
     signatureGrid.replaceChildren(...selected.slice(0, 8).map(createSignatureCard));
   };
 
-  const createMenuSectionElement = (section, sectionItems) => {
+  const createMenuSectionElement = (section, sectionItems, forceOpen = false) => {
     const sectionEl = document.createElement("section");
-    sectionEl.className = "menu-section";
+    const expanded = forceOpen || openSections.has(section.id);
+    sectionEl.className = `menu-section accordion-section${expanded ? " is-open" : ""}`;
     sectionEl.id = slugify(section.name);
     sectionEl.dataset.sectionId = section.id;
 
-    const headerEl = document.createElement("div");
-    headerEl.className = "menu-section-header arabic-frame";
+    const panelId = `panel-${slugify(section.name)}`;
+    const headerEl = document.createElement("button");
+    headerEl.type = "button";
+    headerEl.className = "menu-section-header category-accordion-trigger arabic-frame";
+    headerEl.setAttribute("aria-expanded", String(expanded));
+    headerEl.setAttribute("aria-controls", panelId);
 
     const titleWrap = document.createElement("div");
+    titleWrap.className = "category-title-wrap";
     const title = document.createElement("h3");
     title.textContent = section.name;
     titleWrap.appendChild(title);
@@ -439,15 +605,41 @@
       titleWrap.appendChild(ar);
     }
 
+    const meta = document.createElement("span");
+    meta.className = "category-meta";
+
     const count = document.createElement("span");
     count.textContent = `${sectionItems.length} item${sectionItems.length === 1 ? "" : "s"}`;
-    headerEl.append(titleWrap, count);
+    const chevron = document.createElement("span");
+    chevron.className = "chevron";
+    chevron.setAttribute("aria-hidden", "true");
+    chevron.textContent = "⌄";
+    meta.append(count, chevron);
+    headerEl.append(titleWrap, meta);
+
+    const panel = document.createElement("div");
+    panel.className = "category-panel";
+    panel.id = panelId;
+    panel.hidden = !expanded;
 
     const grid = document.createElement("div");
     grid.className = "menu-item-grid";
     sectionItems.forEach((item) => grid.appendChild(createItemCard(item)));
+    panel.appendChild(grid);
 
-    sectionEl.append(headerEl, grid);
+    headerEl.addEventListener("click", () => {
+      const isExpanded = headerEl.getAttribute("aria-expanded") === "true";
+      headerEl.setAttribute("aria-expanded", String(!isExpanded));
+      panel.hidden = isExpanded;
+      sectionEl.classList.toggle("is-open", !isExpanded);
+      if (isExpanded) {
+        openSections.delete(section.id);
+      } else {
+        openSections.add(section.id);
+      }
+    });
+
+    sectionEl.append(headerEl, panel);
     return sectionEl;
   };
 
@@ -485,7 +677,7 @@
         visibleCount += sectionItems.length;
         visibleSections.add(section.id);
         visibleGroups.add(group.id);
-        groupSections.push(createMenuSectionElement(section, sectionItems));
+        groupSections.push(createMenuSectionElement(section, sectionItems, Boolean(query)));
       });
 
       if (groupSections.length) {
@@ -500,7 +692,7 @@
 
       visibleCount += sectionItems.length;
       visibleSections.add(section.id);
-      sectionContainer.appendChild(createMenuSectionElement(section, sectionItems));
+      sectionContainer.appendChild(createMenuSectionElement(section, sectionItems, Boolean(query)));
     });
 
     menuCount.textContent = query
@@ -509,6 +701,16 @@
     noResults.hidden = visibleCount > 0;
 
     [...categoryNav.querySelectorAll("button")].forEach((button) => {
+      if (button.dataset.groupId) {
+        button.hidden = query ? !visibleGroups.has(button.dataset.groupId) : false;
+        button.setAttribute("aria-pressed", button.classList.contains("is-active") ? "true" : "false");
+        return;
+      }
+      button.hidden = query && button.dataset.sectionId ? !visibleSections.has(button.dataset.sectionId) : false;
+      button.setAttribute("aria-pressed", button.classList.contains("is-active") ? "true" : "false");
+    });
+
+    [...visualCategoryStrip.querySelectorAll("button")].forEach((button) => {
       if (button.dataset.groupId) {
         button.hidden = query ? !visibleGroups.has(button.dataset.groupId) : false;
         return;
@@ -522,7 +724,13 @@
   let observer;
   const observeSections = () => {
     if (observer) observer.disconnect();
-    const buttons = new Map([...categoryNav.querySelectorAll("button")].map((button) => [button.dataset.target, button]));
+    const navButtons = [...categoryNav.querySelectorAll("button"), ...visualCategoryStrip.querySelectorAll("button")];
+    const buttons = new Map();
+    navButtons.forEach((button) => {
+      if (!button.dataset.target) return;
+      if (!buttons.has(button.dataset.target)) buttons.set(button.dataset.target, []);
+      buttons.get(button.dataset.target).push(button);
+    });
 
     observer = new IntersectionObserver(
       (entries) => {
@@ -531,9 +739,17 @@
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (!visible) return;
 
-        buttons.forEach((button) => button.classList.remove("is-active"));
-        const active = buttons.get(visible.target.id);
-        if (active) active.classList.add("is-active");
+        buttons.forEach((buttonList) => {
+          buttonList.forEach((button) => {
+            button.classList.remove("is-active");
+            button.setAttribute("aria-pressed", "false");
+          });
+        });
+        const activeButtons = buttons.get(visible.target.id) || [];
+        activeButtons.forEach((active) => {
+          active.classList.add("is-active");
+          active.setAttribute("aria-pressed", "true");
+        });
       },
       { rootMargin: "-40% 0px -50% 0px", threshold: [0.1, 0.25, 0.5] }
     );
@@ -541,6 +757,7 @@
     document.querySelectorAll(".menu-group, .menu-section").forEach((section) => observer.observe(section));
   };
 
+  renderVisualCategories();
   renderCategoryNav();
   renderSignatures();
   renderMenu();

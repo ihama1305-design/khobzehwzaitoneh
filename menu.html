@@ -54,7 +54,7 @@
         <div class="menu-title-grid">
           <div class="menu-title-block">
             <p class="eyebrow">Digital Menu</p>
-            <h1>From our oven to your table</h1>
+            <h1>From our oven<br />to your table</h1>
             <p>
               Palestinian dishes, warm bread, olive oil, pastries, daily plates, sweets, and drinks. Prices are listed in AED from the verified FineDine menu source.
             </p>
@@ -66,7 +66,7 @@
           </div>
 
           <figure class="menu-hero-card arabic-frame">
-            <img src="assets/dishes/breakfast-tray.jpg" alt="Palestinian breakfast tray from the current menu" />
+            <img src="assets/finedine/items/jabel-al-nar-breakfast-tray-2b649c94.jpg" alt="Palestinian breakfast tray from the current menu" />
             <figcaption>Verified menu prices are shown where available.</figcaption>
           </figure>
         </div>
@@ -74,57 +74,27 @@
     </header>
 
     <main id="menuContent">
-      <section class="menu-overview" aria-labelledby="menuOverviewTitle">
-        <div class="menu-overview-heading">
-          <p class="eyebrow">Choose a Menu Path</p>
-          <h2 id="menuOverviewTitle">The Khobzeh menu</h2>
-          <p>Jump into the table section you need, then use search or the sticky category bar to narrow the full menu.</p>
-        </div>
-        <div class="menu-jump-grid" aria-label="Menu section shortcuts">
-          <a class="menu-jump-card" href="#group-morning-table">
-            <img src="assets/dishes/breakfast-tray.jpg" alt="Palestinian breakfast tray" />
-            <span>
-              <strong>Morning Table</strong>
-              <small>Breakfast, mezze, salads, fatteh</small>
-            </span>
-          </a>
-          <a class="menu-jump-card" href="#group-oven-bakery">
-            <img src="assets/images/mushrouha-cheese-oman.jpg" alt="Fresh baked mashrouha pastry" />
-            <span>
-              <strong>Oven & Bakery</strong>
-              <small>Mana'esh, mashrouha, ka'ak, pizza</small>
-            </span>
-          </a>
-          <a class="menu-jump-card" href="#group-mains-pottery">
-            <img src="https://media.finedinemenu.com/paD9-md-v/321141b3-117f-4c53-ab15-084f5d7ee022.jpeg" alt="Mansaf from the current menu" />
-            <span>
-              <strong>Mains & Kids</strong>
-              <small>Daily dishes, pottery, hot plates</small>
-            </span>
-          </a>
-          <a class="menu-jump-card" href="#group-sweets-drinks">
-            <img src="assets/video-frames/menu-dish-01.jpg" alt="Restaurant drink and table detail" />
-            <span>
-              <strong>Sweets & Drinks</strong>
-              <small>Desserts, coffee, juices, mojitos</small>
-            </span>
-          </a>
-          <a class="menu-jump-card" href="#group-shisha-retail">
-            <img src="assets/video-frames/gallery-detail-01.jpg" alt="Palestinian pantry and interior detail" />
-            <span>
-              <strong>Shisha & Retail</strong>
-              <small>Shisha and pantry items</small>
-            </span>
-          </a>
-        </div>
-      </section>
-
-      <section class="menu-tools" aria-label="Menu search and categories">
+      <section class="menu-tools" aria-label="Menu search">
         <label class="search-wrap" for="menuSearch">
           <span>Search dishes</span>
           <input type="search" id="menuSearch" placeholder="Search dishes, Arabic names, descriptions, or categories..." autocomplete="off" />
         </label>
-        <nav class="category-nav" id="categoryNav" aria-label="Menu categories"></nav>
+      </section>
+
+      <section class="visual-category-section" aria-labelledby="visualCategoryTitle">
+        <div class="menu-overview-heading">
+          <p class="eyebrow">Choose by Photo</p>
+          <h2 id="visualCategoryTitle">Browse the table visually</h2>
+          <p>Use the image-led category strip for quick browsing, then open only the menu sections you want.</p>
+        </div>
+        <div class="visual-category-strip" id="visualCategoryStrip" aria-label="Visual menu categories"></div>
+      </section>
+
+      <section class="category-filter-section" aria-label="Compact menu category filters">
+        <div class="category-filter-inner">
+          <p class="eyebrow">Quick Categories</p>
+          <nav class="category-nav" id="categoryNav" aria-label="Menu categories"></nav>
+        </div>
       </section>
 
       <section class="signature-section" aria-labelledby="signatureTitle">

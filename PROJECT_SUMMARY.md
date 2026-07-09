@@ -112,6 +112,7 @@ Suggested palette:
   --soft-cream: #eee7da;
 
   --deep-green: #1f3a24;
+  --forest-green: #16351f;
   --olive-green: #4e6b3c;
   --sage-green: #8a9b73;
   --mint-grey: #d8dfd0;
@@ -120,6 +121,11 @@ Suggested palette:
   --soft-charcoal: #383c39;
   --stone-grey: #6f746e;
   --light-grey: #ecefec;
+
+  --burgundy: #6f1d1b;
+  --maroon: #4a1413;
+  --dark-red: #8a2e24;
+  --rose-clay: #b66a5c;
 
   --arabic-frame: #263b29;
   --gold-muted: #b89b5e;
@@ -646,6 +652,23 @@ These are the newest collaborator notes and should be treated as active prioriti
 11. Use Sla Cafe as a quality reference for dark textured hero/contact sections, strong bold typography, clean white navigation, and organized contact/footer presentation.
 12. Keep the site culturally Palestinian / Levantine and not generic cafe branding.
 
+## Latest Menu and Mobile Layout Update
+
+- The FineDine menu is the reference source for menu structure, dish names, prices, categories, and photos.
+- The GitHub Pages `menu.html` is the static customer-facing menu and must be compared against FineDine for completeness.
+- All dish photos should be correctly mapped to the matching dish.
+- Missing photos should be filled from FineDine, provided videos, existing restaurant assets, or left as no-photo cards without broken image icons.
+- The menu design now uses the Sla Cafe-style screenshot as UX inspiration: top search, visual category strip, image-led browsing, and large photo-first cards.
+- Category headings in the full menu should be collapsible dropdown/accordion sections.
+- Quick category buttons should be compact, wrapping or grid-based instead of one long horizontal strip.
+- Mobile Visit Us section should be more spacious and not cramped.
+- The palette now includes burgundy/maroon accents in addition to green, charcoal, and white.
+- Yellow/gold should be used sparingly.
+- The site should remain fully responsive for mobile, iPad, laptop, desktop, and large desktop.
+- Do not fabricate prices, reviews, photos, or restaurant facts.
+- If the local dataset says there are 220 items across 27 categories, verify that all 220 items and 27 categories actually render.
+- Latest local media pass attempted 244 FineDine media references. 68 were localized successfully and the remaining failed or unavailable media should render as intentional no-photo cards.
+
 # 15. Developer Rules
 
 Collaborators should follow these rules:
@@ -697,6 +720,19 @@ Collaborators should follow these rules:
 - [ ] Menu category navigation works.
 - [ ] Menu category control is compact and not a bulky horizontal top scroller.
 - [ ] Menu sections are professionally grouped.
+- [ ] FineDine menu was compared against local `menu.html`.
+- [ ] Dish photos are correctly matched to dishes.
+- [ ] No broken menu images appear.
+- [ ] No unrelated dish photos are used.
+- [ ] Menu image thumbnails are viewable and not badly cropped.
+- [ ] Visual category strip exists on `menu.html`.
+- [ ] Category pills are compact and responsive.
+- [ ] Full menu categories are collapsible accordions.
+- [ ] Search opens matching categories automatically.
+- [ ] Mobile Visit Us section has enough spacing.
+- [ ] Burgundy/maroon accents are added tastefully.
+- [ ] Yellow/gold is not overused.
+- [ ] Item and category counts are accurate.
 - [ ] Menu card images all render correctly.
 - [ ] Menu card text and prices stay inside card boundaries.
 - [ ] No fake prices are added.
