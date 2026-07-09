@@ -25,6 +25,64 @@
     });
   }
 
+  document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+    const track = carousel.querySelector("[data-carousel-track]");
+    const prev = carousel.querySelector("[data-carousel-prev]");
+    const next = carousel.querySelector("[data-carousel-next]");
+    if (!track || !prev || !next) return;
+
+    const scrollCards = (direction) => {
+      const amount = Math.max(280, track.clientWidth * 0.82);
+      track.scrollBy({ left: amount * direction, behavior: "smooth" });
+    };
+
+    prev.addEventListener("click", () => scrollCards(-1));
+    next.addEventListener("click", () => scrollCards(1));
+  });
+
+  const reviewGrid = document.getElementById("reviewGrid");
+  if (reviewGrid && window.location.protocol !== "file:") {
+    fetch("data/reviews.json")
+      .then((response) => (response.ok ? response.json() : []))
+      .then((reviews) => {
+        if (!Array.isArray(reviews) || !reviews.length) return;
+        reviewGrid.replaceChildren(...reviews.slice(0, 3).map((review) => {
+          const card = document.createElement("a");
+          card.className = "review-card arabic-frame";
+          card.href = review.url || "https://maps.app.goo.gl/xRNT1w5RNDVHsaGbA";
+          card.target = "_blank";
+          card.rel = "noopener";
+
+          const stars = document.createElement("span");
+          stars.className = "review-stars";
+          const rating = Math.max(0, Math.min(5, Number(review.rating) || 0));
+          stars.textContent = "★★★★★".slice(0, rating) || "Rating pending";
+          stars.setAttribute("aria-label", rating ? `${rating} out of 5 stars` : "Rating pending");
+
+          const text = document.createElement("p");
+          text.textContent = review.text || "Verified Google review quote pending.";
+
+          const name = document.createElement("strong");
+          name.textContent = review.name || "Google reviewer";
+
+          const cta = document.createElement("em");
+          cta.textContent = "Read on Google Maps";
+
+          if (review.avatar) {
+            const avatar = document.createElement("img");
+            avatar.className = "review-avatar";
+            avatar.src = review.avatar;
+            avatar.alt = review.name ? `${review.name} reviewer avatar` : "Google reviewer avatar";
+            card.appendChild(avatar);
+          }
+
+          card.append(stars, text, name, cta);
+          return card;
+        }));
+      })
+      .catch(() => {});
+  }
+
   const menuData = window.KWZ_MENU_DATA;
   if (!menuData) return;
 
@@ -37,7 +95,6 @@
 
   if (!sectionContainer || !categoryNav || !signatureGrid || !searchInput) return;
 
-  const mediaBaseUrl = menuData.mediaBaseUrl || "https://media.finedinemenu.com/";
   const sections = [...menuData.sections].sort((a, b) => a.order - b.order);
   const sectionById = new Map(sections.map((section) => [section.id, section]));
   const items = [...menuData.items].sort((a, b) => a.order - b.order || a.name.localeCompare(b.name));
@@ -51,6 +108,13 @@
     "Palestinian Olive Oil(500ml)",
     "Truffle Pizza"
   ];
+
+  const localImages = new Map([
+    ["jabel al nar breakfast tray", "assets/dishes/breakfast-tray.jpg"],
+    ["falafel fattah", "assets/images/falafel-fatteh.jpg"],
+    ["mushrouha cheese and oman chips", "assets/images/mushrouha-cheese-oman.jpg"],
+    ["truffle pizza", "assets/images/truffle-pizza.jpg"]
+  ]);
 
   const normalize = (value) =>
     String(value || "")
@@ -68,12 +132,10 @@
     if (!options.length && item.price === null) return "Ask server";
     if (options.length <= 1) return `AED ${item.price ?? options[0].value}`;
 
-    const labels = options.map((option) => {
+    return options.map((option) => {
       const label = option.label ? `${option.label} ` : "";
       return `${label}AED ${option.value}`;
-    });
-
-    return labels.join(" / ");
+    }).join(" / ");
   };
 
   const displayTags = (item) => {
@@ -88,6 +150,15 @@
     if (item.soldout) tags.add("Sold out");
 
     return [...tags];
+  };
+
+  const imageForItem = (item) => {
+    const exact = localImages.get(normalize(item.name));
+    if (exact) return exact;
+    for (const [key, value] of localImages.entries()) {
+      if (normalize(item.name).includes(key)) return value;
+    }
+    return "";
   };
 
   const itemMatches = (item, query) => {
@@ -107,7 +178,7 @@
 
   const createItemCard = (item) => {
     const article = document.createElement("article");
-    article.className = "menu-item-card";
+    article.className = "menu-item-card arabic-frame";
     article.dataset.search = [
       item.name,
       item.ar,
@@ -117,7 +188,19 @@
       Array.isArray(item.tags) ? item.tags.join(" ") : ""
     ].join(" ");
 
+    const image = imageForItem(item);
+    if (image) {
+      const figure = document.createElement("figure");
+      figure.className = "menu-item-image";
+      const img = document.createElement("img");
+      img.src = image;
+      img.alt = `${item.name} from Khobzeh w Zaitoneh`;
+      figure.appendChild(img);
+      article.appendChild(figure);
+    }
+
     const content = document.createElement("div");
+    content.className = "menu-card-content";
     const top = document.createElement("div");
     top.className = "menu-card-top";
 
@@ -164,7 +247,15 @@
 
   const createSignatureCard = (item) => {
     const card = document.createElement("article");
-    card.className = "signature-card";
+    card.className = "signature-card arabic-frame";
+
+    const image = imageForItem(item);
+    if (image) {
+      const img = document.createElement("img");
+      img.src = image;
+      img.alt = `${item.name} from Khobzeh w Zaitoneh`;
+      card.appendChild(img);
+    }
 
     const section = sectionById.get(item.sectionId);
     const tag = document.createElement("p");
@@ -244,8 +335,8 @@
       sectionEl.id = slugify(section.name);
       sectionEl.dataset.sectionId = section.id;
 
-      const header = document.createElement("div");
-      header.className = "menu-section-header";
+      const headerEl = document.createElement("div");
+      headerEl.className = "menu-section-header arabic-frame";
 
       const titleWrap = document.createElement("div");
       const title = document.createElement("h3");
@@ -263,13 +354,13 @@
 
       const count = document.createElement("span");
       count.textContent = `${sectionItems.length} item${sectionItems.length === 1 ? "" : "s"}`;
-      header.append(titleWrap, count);
+      headerEl.append(titleWrap, count);
 
       const grid = document.createElement("div");
       grid.className = "menu-item-grid";
       sectionItems.forEach((item) => grid.appendChild(createItemCard(item)));
 
-      sectionEl.append(header, grid);
+      sectionEl.append(headerEl, grid);
       sectionContainer.appendChild(sectionEl);
     });
 

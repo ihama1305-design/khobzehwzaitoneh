@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" role="img" aria-labelledby="title desc">
+  <title id="title">Subtle olive tree line art</title>
+  <desc id="desc">A dark green olive tree silhouette with branches and olives, intended as a quiet Palestinian-inspired background motif.</desc>
+  <defs>
+    <filter id="soften" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="0.35" />
+    </filter>
+  </defs>
+  <g fill="none" stroke="#263b29" stroke-linecap="round" stroke-linejoin="round" opacity="0.28" filter="url(#soften)">
+    <path stroke-width="18" d="M441 657c-10-76 12-148 24-215 8-44 0-84-18-126" />
+    <path stroke-width="12" d="M452 428c-46-55-91-91-159-118M463 408c58-55 122-94 206-121M450 341c-21-64-13-124 21-183" />
+    <path stroke-width="8" d="M332 322c-52-4-102 17-148 58M301 300c-64-41-134-53-204-37M607 327c64-11 125 2 183 39M645 292c46-47 99-76 159-86M470 176c-45-38-93-58-146-63M484 169c43-53 92-87 148-101" />
+    <path stroke-width="5" d="M173 381c38-41 86-60 143-56M101 264c77-19 142-8 197 36M321 113c58-7 104 12 139 57M628 68c-54 26-97 61-129 105M804 207c-62 4-113 30-153 80M790 366c-63-28-125-39-188-34" />
+  </g>
+  <g fill="#263b29" opacity="0.18">
+    <ellipse cx="184" cy="382" rx="34" ry="15" transform="rotate(-32 184 382)" />
+    <ellipse cx="236" cy="342" rx="36" ry="14" transform="rotate(-18 236 342)" />
+    <ellipse cx="132" cy="263" rx="35" ry="14" transform="rotate(12 132 263)" />
+    <ellipse cx="225" cy="251" rx="40" ry="15" transform="rotate(22 225 251)" />
+    <ellipse cx="342" cy="116" rx="35" ry="14" transform="rotate(10 342 116)" />
+    <ellipse cx="444" cy="146" rx="35" ry="14" transform="rotate(47 444 146)" />
+    <ellipse cx="598" cy="86" rx="38" ry="15" transform="rotate(-31 598 86)" />
+    <ellipse cx="705" cy="235" rx="39" ry="15" transform="rotate(-26 705 235)" />
+    <ellipse cx="782" cy="207" rx="35" ry="14" transform="rotate(-6 782 207)" />
+    <ellipse cx="700" cy="349" rx="38" ry="15" transform="rotate(19 700 349)" />
+    <ellipse cx="608" cy="327" rx="36" ry="14" transform="rotate(-8 608 327)" />
+    <ellipse cx="309" cy="327" rx="33" ry="13" transform="rotate(27 309 327)" />
+  </g>
+  <g fill="#1f3a24" opacity="0.22">
+    <circle cx="260" cy="312" r="8" />
+    <circle cx="166" cy="286" r="7" />
+    <circle cx="395" cy="128" r="7" />
+    <circle cx="570" cy="112" r="8" />
+    <circle cx="671" cy="277" r="8" />
+    <circle cx="744" cy="357" r="7" />
+    <circle cx="224" cy="373" r="8" />
+  </g>
+</svg>

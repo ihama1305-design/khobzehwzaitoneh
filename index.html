@@ -14,7 +14,7 @@
       content="Authentic Palestinian flavours served with warm bread, olive oil, and the comfort of home in Abu Dhabi."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="assets/images/menu-background.jpg" />
+    <meta property="og:image" content="assets/video/hero-poster.jpg" />
     <meta property="og:locale" content="en_AE" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,6 +22,7 @@
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" href="assets/images/logo-cropped.jpg" />
     <link rel="stylesheet" href="styles.css" />
     <script type="application/ld+json">
       {
@@ -56,7 +57,7 @@
 
     <header class="site-header" data-header>
       <a class="brand-lockup" href="#home" aria-label="Khobzeh w Zaitoneh home">
-        <img src="assets/images/logo.jpg" alt="Khobzeh w Zaitoneh Arabic logo" />
+        <img class="brand-logo" src="assets/images/logo-cropped.jpg" alt="Khobzeh w Zaitoneh Arabic logo" />
         <span>
           <strong>Khobzeh w Zaitoneh</strong>
           <small lang="ar" dir="rtl">خبزة و زيتونة</small>
@@ -87,8 +88,11 @@
 
     <main id="main">
       <section class="hero" id="home" aria-labelledby="heroTitle">
-        <div class="hero-image" aria-hidden="true">
-          <img src="assets/images/breakfast-tray.jpg" alt="" />
+        <div class="hero-media" aria-hidden="true">
+          <video class="hero-video" autoplay muted loop playsinline poster="assets/video/hero-poster.jpg">
+            <source src="assets/video/hero-video.mp4" type="video/mp4" />
+          </video>
+          <img class="hero-poster-fallback" src="assets/video/hero-poster.jpg" alt="" />
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -114,187 +118,264 @@
       </section>
 
       <section class="section story-section" id="story" aria-labelledby="storyTitle">
-        <div class="section-intro">
-          <p class="eyebrow">Our Story</p>
-          <h2 id="storyTitle">Bread, olive oil, and the language of hospitality</h2>
+        <img class="story-olive-art" src="assets/story/olive-tree-bg.svg" alt="" aria-hidden="true" />
+        <div class="story-shell">
+          <div class="story-copy arabic-frame">
+            <p class="eyebrow">Our Story</p>
+            <h2 id="storyTitle">Bread, olive oil, and the language of hospitality</h2>
+            <p>
+              Khobzeh w Zaitoneh means a piece of bread and an olive. It is a simple Palestinian image, but it carries a full table: warm bread passed from hand to hand, olive oil poured generously, and dishes remembered from home.
+            </p>
+            <p>
+              In Abu Dhabi, that feeling becomes a modern Palestinian table shaped by fresh dough, bright salads, slow-cooked daily dishes, oven pastries, sumac, zaatar, herbs, and the comfort of family-style food.
+            </p>
+          </div>
+
+          <div class="story-collage" aria-label="Restaurant story photography">
+            <figure class="story-photo story-photo-main arabic-frame">
+              <img src="assets/video-frames/gallery-table-01.jpg" alt="Olive tree decor inside Khobzeh w Zaitoneh" />
+            </figure>
+            <figure class="story-photo story-photo-offset arabic-frame">
+              <img src="assets/video-frames/gallery-interior-01.jpg" alt="Palestine-shaped mirror and patterned frame in the restaurant" />
+            </figure>
+            <figure class="story-photo story-photo-small arabic-frame">
+              <img src="assets/video-frames/menu-dish-02.jpg" alt="Traditional shelf decor on a stone wall" />
+            </figure>
+          </div>
         </div>
-        <div class="story-grid">
-          <div class="story-copy">
-            <p>
-              Khobzeh w Zaitoneh means a piece of bread and an olive. It is a simple Palestinian image, but it carries a full table: the bread passed warm from hand to hand, the olive oil poured generously, and the dishes remembered from home.
-            </p>
-            <p>
-              In Abu Dhabi, the restaurant brings that feeling into a modern, welcoming space. Expect fresh dough, bright salads, slow-cooked daily dishes, pastries from the oven, and flavours built around olive oil, herbs, sumac, zaatar, and family-style comfort.
-            </p>
-          </div>
-          <div class="story-values" aria-label="Restaurant values">
-            <article>
-              <span>01</span>
-              <h3>From the Oven</h3>
-              <p>Fresh bread, mana'esh, mashrouha pastry, ka'ak, and sourdough manakesh anchor the menu.</p>
-            </article>
-            <article>
-              <span>02</span>
-              <h3>Olive Oil</h3>
-              <p>Olive oil appears through mezze, salads, pastries, daily dishes, and pantry retail items.</p>
-            </article>
-            <article>
-              <span>03</span>
-              <h3>Home Table</h3>
-              <p>Breakfast trays, mansaf, musakhan, fatteh, pottery dishes, and sweets make the meal generous.</p>
-            </article>
-          </div>
+
+        <div class="story-values" aria-label="Restaurant values">
+          <article class="arabic-frame">
+            <span>01</span>
+            <h3>From the Oven</h3>
+            <p>Fresh bread, mana'esh, mashrouha pastry, ka'ak, and sourdough manakesh anchor the table.</p>
+          </article>
+          <article class="arabic-frame">
+            <span>02</span>
+            <h3>Olive Oil</h3>
+            <p>Olive oil runs through mezze, salads, pastries, daily dishes, and pantry retail items.</p>
+          </article>
+          <article class="arabic-frame">
+            <span>03</span>
+            <h3>Home Table</h3>
+            <p>Breakfast trays, mansaf, musakhan, fatteh, pottery dishes, and sweets keep the meal generous.</p>
+          </article>
         </div>
       </section>
 
       <section class="section featured-section" id="featured" aria-labelledby="featuredTitle">
-        <div class="section-intro section-intro-wide">
-          <p class="eyebrow">From the Current Menu</p>
-          <h2 id="featuredTitle">Palestinian favourites and oven-baked signatures</h2>
+        <div class="section-heading split-heading">
+          <div>
+            <p class="eyebrow">From the Current Menu</p>
+            <h2 id="featuredTitle">Palestinian favourites and oven-baked signatures</h2>
+          </div>
           <p>
-            Prices shown below are pulled from the verified FineDine menu source where available. The full menu page renders the current static menu dataset.
+            Swipe through verified menu items. Prices are shown only where they are available from the current FineDine menu dataset.
           </p>
         </div>
-        <div class="feature-grid">
-          <article class="feature-card">
-            <img src="assets/images/breakfast-tray.jpg" alt="Palestinian breakfast tray with eggs, tea, labneh, vegetables, and olives" />
-            <div>
-              <p class="tag">Breakfast</p>
-              <h3>Palestinian Breakfast Trays</h3>
-              <p>Sharing trays with olives, labneh, bread, cheese, eggs, tea, and classic morning dishes.</p>
-              <span>From AED 69</span>
-            </div>
-          </article>
-          <article class="feature-card">
-            <img src="assets/images/falafel-fatteh.jpg" alt="Falafel fatteh served in a bowl" />
-            <div>
-              <p class="tag">New Items</p>
-              <h3>Falafel Fattah</h3>
-              <p>A current menu favourite in the new-items section.</p>
-              <span>AED 46</span>
-            </div>
-          </article>
-          <article class="feature-card">
-            <img src="assets/images/mushrouha-cheese-oman.jpg" alt="Mushrouha pastry with cheese and Oman chips" />
-            <div>
-              <p class="tag">Pastry</p>
-              <h3>Mushrouha Cheese and Oman Chips</h3>
-              <p>A playful mashrouha pastry from the current new-items section.</p>
-              <span>AED 40</span>
-            </div>
-          </article>
-          <article class="feature-card">
-            <img src="assets/images/truffle-pizza.jpg" alt="Truffle mushroom pizza on restaurant paper" />
-            <div>
-              <p class="tag">From the Oven</p>
-              <h3>Truffle Pizza</h3>
-              <p>Freshly baked dough with creamy sauce, mozzarella, mushrooms, and truffle oil.</p>
-              <span>AED 75</span>
-            </div>
-          </article>
-          <article class="feature-card feature-card-text">
-            <div>
-              <p class="tag">Daily Dish</p>
-              <h3>Mansaf</h3>
-              <p>Lamb cooked with jameed yogurt and Arabic ghee, served with rice and nuts.</p>
-              <span>AED 89</span>
-            </div>
-          </article>
-          <article class="feature-card feature-card-text">
-            <div>
-              <p class="tag">Palestinian Classic</p>
-              <h3>Chicken Musakhan</h3>
-              <p>Grilled chicken with onions and sumac cooked in olive oil.</p>
-              <span>AED 75</span>
-            </div>
-          </article>
-          <article class="feature-card feature-card-text">
-            <div>
-              <p class="tag">Mezze</p>
-              <h3>Hummus</h3>
-              <p>Traditional hummus with olive oil and sumac.</p>
-              <span>AED 32</span>
-            </div>
-          </article>
-          <article class="feature-card feature-card-text">
-            <div>
-              <p class="tag">Retail</p>
-              <h3>Palestinian Olive Oil</h3>
-              <p>Pantry olive oil available in 500 ml and 1000 ml bottles.</p>
-              <span>From AED 60</span>
-            </div>
-          </article>
+
+        <div class="carousel-wrap" data-carousel>
+          <button class="carousel-arrow carousel-arrow-prev" type="button" aria-label="Scroll featured dishes left" data-carousel-prev>
+            <span aria-hidden="true">‹</span>
+          </button>
+          <div class="dish-carousel" tabindex="0" data-carousel-track aria-label="Featured dishes carousel">
+            <article class="dish-card arabic-frame">
+              <img src="assets/dishes/breakfast-tray.jpg" alt="Jabel Al Nar Palestinian breakfast tray" />
+              <div class="dish-card-body">
+                <p class="tag">Breakfast Tray</p>
+                <h3>Jabel Al Nar Breakfast Tray</h3>
+                <span class="arabic-name" lang="ar" dir="rtl">صينية فطور جبل النار</span>
+                <strong>AED 69</strong>
+              </div>
+              <div class="dish-overlay">
+                <p>Fava beans, eggs, labneh balls, vegetables, olives, thyme with olive oil, Nabulsi cheese, bread, jam, and tea.</p>
+              </div>
+            </article>
+
+            <article class="dish-card arabic-frame">
+              <img src="assets/images/falafel-fatteh.jpg" alt="Falafel fatteh bowl" />
+              <div class="dish-card-body">
+                <p class="tag">New Items</p>
+                <h3>Falafel Fattah</h3>
+                <span class="arabic-name" lang="ar" dir="rtl">فتة فلافل</span>
+                <strong>AED 46</strong>
+              </div>
+              <div class="dish-overlay">
+                <p>A current menu favourite from the new-items section, served as a generous fatteh-style bowl.</p>
+              </div>
+            </article>
+
+            <article class="dish-card arabic-frame">
+              <img src="assets/images/mushrouha-cheese-oman.jpg" alt="Mushrouha cheese and Oman chips pastry" />
+              <div class="dish-card-body">
+                <p class="tag">Pastry</p>
+                <h3>Mushrouha Cheese and Oman Chips</h3>
+                <span class="arabic-name" lang="ar" dir="rtl">مشروحة جبنة شيبس عمان</span>
+                <strong>AED 40</strong>
+              </div>
+              <div class="dish-overlay">
+                <p>A playful mashrouha pastry from the current menu, built around warm bread and cheese.</p>
+              </div>
+            </article>
+
+            <article class="dish-card arabic-frame">
+              <img src="assets/images/truffle-pizza.jpg" alt="Truffle mushroom pizza" />
+              <div class="dish-card-body">
+                <p class="tag">From the Oven</p>
+                <h3>Truffle Pizza</h3>
+                <span class="arabic-name" lang="ar" dir="rtl">بيتزا ترافل</span>
+                <strong>AED 75</strong>
+              </div>
+              <div class="dish-overlay">
+                <p>Freshly baked dough with creamy sauce, mozzarella, mushrooms, and premium truffle oil.</p>
+              </div>
+            </article>
+
+            <article class="dish-card arabic-frame">
+              <img src="assets/images/new-items-section.jpg" alt="A plated dish from the restaurant new-items section" />
+              <div class="dish-card-body">
+                <p class="tag">New Items</p>
+                <h3>Seasonal New Items</h3>
+                <strong>See menu</strong>
+              </div>
+              <div class="dish-overlay">
+                <p>Rotating current-menu dishes and new plates from the Khobzeh w Zaitoneh kitchen.</p>
+              </div>
+            </article>
+
+            <article class="dish-card dish-card-text arabic-frame">
+              <!-- TODO: Add owner-approved Mansaf photo. FineDine media endpoint returned a TooLargeImageException for this item image. -->
+              <div class="dish-card-body">
+                <p class="tag">Daily Dish</p>
+                <h3>Mansaf</h3>
+                <span class="arabic-name" lang="ar" dir="rtl">منسف</span>
+                <strong>AED 89</strong>
+              </div>
+              <div class="dish-overlay">
+                <p>Lamb cooked with jameed yogurt and Arabic ghee, served with rice and nuts.</p>
+              </div>
+            </article>
+
+            <article class="dish-card dish-card-text arabic-frame">
+              <!-- TODO: Add owner-approved Chicken Musakhan photo. FineDine media endpoint returned a TooLargeImageException for this item image. -->
+              <div class="dish-card-body">
+                <p class="tag">Palestinian Classic</p>
+                <h3>Chicken Musakhan</h3>
+                <span class="arabic-name" lang="ar" dir="rtl">مسخن الدجاج</span>
+                <strong>AED 75</strong>
+              </div>
+              <div class="dish-overlay">
+                <p>Grilled chicken with onions and sumac cooked in olive oil.</p>
+              </div>
+            </article>
+
+            <article class="dish-card dish-card-text arabic-frame">
+              <!-- TODO: Add owner-approved Hummus photo. FineDine media endpoint returned a TooLargeImageException for this item image. -->
+              <div class="dish-card-body">
+                <p class="tag">Mezze</p>
+                <h3>Hummus</h3>
+                <span class="arabic-name" lang="ar" dir="rtl">حمص</span>
+                <strong>AED 32</strong>
+              </div>
+              <div class="dish-overlay">
+                <p>Traditional hummus with olive oil and sumac.</p>
+              </div>
+            </article>
+
+            <article class="dish-card dish-card-text arabic-frame">
+              <!-- TODO: Add owner-approved Zaatar photo. -->
+              <div class="dish-card-body">
+                <p class="tag">Mana'esh</p>
+                <h3>Zaatar</h3>
+                <span class="arabic-name" lang="ar" dir="rtl">منقوشة زعتر</span>
+                <strong>AED 20</strong>
+              </div>
+              <div class="dish-overlay">
+                <p>Thyme and olive oil manousheh from the current menu.</p>
+              </div>
+            </article>
+          </div>
+          <button class="carousel-arrow carousel-arrow-next" type="button" aria-label="Scroll featured dishes right" data-carousel-next>
+            <span aria-hidden="true">›</span>
+          </button>
         </div>
       </section>
 
       <section class="section gallery-section" id="gallery" aria-labelledby="galleryTitle">
-        <div class="section-intro">
+        <div class="section-heading">
           <p class="eyebrow">Gallery</p>
-          <h2 id="galleryTitle">Warm plates, patterned tables, and oven-baked comfort</h2>
+          <h2 id="galleryTitle">Food, olive branches, stone walls, and Palestinian details</h2>
         </div>
-        <!-- TODO: Add legally approved interior photos from Instagram or an owner-provided gallery. -->
         <div class="gallery-grid">
-          <figure>
-            <img src="assets/images/breakfast-tray.jpg" alt="Breakfast tray with Palestinian tableware" />
-            <figcaption>Breakfast table</figcaption>
+          <figure class="arabic-frame gallery-large">
+            <img src="assets/gallery/olive-tree.jpg" alt="Olive tree decor inside the restaurant" />
+            <figcaption>Olive tree</figcaption>
           </figure>
-          <figure>
-            <img src="assets/images/falafel-fatteh.jpg" alt="Falafel fatteh bowl" />
-            <figcaption>Falafel fatteh</figcaption>
+          <figure class="arabic-frame">
+            <img src="assets/gallery/palestine-wall-art.jpg" alt="Framed Palestinian wall art inside Khobzeh w Zaitoneh" />
+            <figcaption>Wall art</figcaption>
           </figure>
-          <figure>
-            <img src="assets/images/mushrouha-cheese-oman.jpg" alt="Mushrouha pastry plate" />
-            <figcaption>Mashrouha pastry</figcaption>
+          <figure class="arabic-frame gallery-tall">
+            <img src="assets/gallery/palestine-mirror.jpg" alt="Palestine-shaped mirror with green patterned frame" />
+            <figcaption>Interior detail</figcaption>
           </figure>
-          <figure>
-            <img src="assets/images/truffle-pizza.jpg" alt="Truffle pizza on a restaurant table" />
-            <figcaption>Truffle pizza</figcaption>
+          <figure class="arabic-frame">
+            <img src="assets/gallery/heritage-shelf.jpg" alt="Traditional shelf decor on stone wall" />
+            <figcaption>Heritage shelf</figcaption>
           </figure>
-          <figure>
-            <img src="assets/images/new-items-section.jpg" alt="Restaurant dish from the new items section" />
-            <figcaption>New items</figcaption>
+          <figure class="arabic-frame">
+            <img src="assets/gallery/olive-branch-close.jpg" alt="Close view of olive branches inside the restaurant" />
+            <figcaption>Olive branches</figcaption>
           </figure>
-          <figure>
-            <img src="assets/images/menu-background.jpg" alt="Illustrated Palestinian-inspired menu background with olive branch" />
-            <figcaption>Menu identity</figcaption>
+          <figure class="arabic-frame">
+            <img src="assets/gallery/palestine-map-detail.jpg" alt="Wooden Palestine map detail" />
+            <figcaption>Palestinian detail</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="section reviews-section" id="reviews" aria-labelledby="reviewsTitle">
-        <div class="section-intro section-intro-wide">
-          <p class="eyebrow">Reviews</p>
-          <h2 id="reviewsTitle">What guests are saying</h2>
+        <div class="section-heading split-heading">
+          <div>
+            <p class="eyebrow">Reviews</p>
+            <h2 id="reviewsTitle">Guest notes from Google</h2>
+          </div>
           <p>
-            Google Maps did not expose rating, review count, or review snippets in this environment. These cards are placeholders for real Google review quotes.
+            Direct Google review text was not publicly available without a Places API key. The cards below are safe static fallbacks and link to Google Maps.
           </p>
         </div>
-        <div class="review-summary">
-          <!-- TODO: Add exact Google rating and number of reviews from Maps. -->
+        <div class="review-summary arabic-frame">
+          <!-- TODO: Replace with exact Google rating and review count from Google Maps or Places API. -->
           <span>Google rating pending</span>
           <a href="https://maps.app.goo.gl/xRNT1w5RNDVHsaGbA" target="_blank" rel="noopener">Open on Google Maps</a>
         </div>
-        <div class="review-grid">
-          <article class="review-card">
-            <!-- TODO: Replace with a real Google review quote. -->
-            <p>Real Google review quote to be added.</p>
-            <span>Verified Google reviewer pending</span>
-          </article>
-          <article class="review-card">
-            <!-- TODO: Replace with a real Google review quote. -->
-            <p>Real Google review quote to be added.</p>
-            <span>Verified Google reviewer pending</span>
-          </article>
-          <article class="review-card">
-            <!-- TODO: Replace with a real Google review quote. -->
-            <p>Real Google review quote to be added.</p>
-            <span>Verified Google reviewer pending</span>
-          </article>
+        <div class="review-grid" id="reviewGrid">
+          <a class="review-card arabic-frame" href="https://maps.app.goo.gl/xRNT1w5RNDVHsaGbA" target="_blank" rel="noopener">
+            <!-- TODO: Replace with a real Google review pulled from Google Maps / Places API. -->
+            <span class="review-stars" aria-label="Rating pending">★★★★★</span>
+            <p>Verified Google review quote pending.</p>
+            <strong>Reviewer name pending</strong>
+            <em>Read on Google Maps</em>
+          </a>
+          <a class="review-card arabic-frame" href="https://maps.app.goo.gl/xRNT1w5RNDVHsaGbA" target="_blank" rel="noopener">
+            <!-- TODO: Replace with a real Google review pulled from Google Maps / Places API. -->
+            <span class="review-stars" aria-label="Rating pending">★★★★★</span>
+            <p>Verified Google review quote pending.</p>
+            <strong>Reviewer name pending</strong>
+            <em>Read on Google Maps</em>
+          </a>
+          <a class="review-card arabic-frame" href="https://maps.app.goo.gl/xRNT1w5RNDVHsaGbA" target="_blank" rel="noopener">
+            <!-- TODO: Replace with a real Google review pulled from Google Maps / Places API. -->
+            <span class="review-stars" aria-label="Rating pending">★★★★★</span>
+            <p>Verified Google review quote pending.</p>
+            <strong>Reviewer name pending</strong>
+            <em>Read on Google Maps</em>
+          </a>
         </div>
       </section>
 
       <section class="section visit-section" id="visit" aria-labelledby="visitTitle">
-        <div class="visit-card">
+        <div class="visit-card arabic-frame">
           <div>
             <p class="eyebrow">Visit Us</p>
             <h2 id="visitTitle">Khobzeh w Zaitoneh in Abu Dhabi</h2>

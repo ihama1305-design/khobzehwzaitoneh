@@ -11,13 +11,14 @@
     <meta property="og:title" content="Menu | Khobzeh w Zaitoneh Abu Dhabi" />
     <meta property="og:description" content="A mobile-friendly digital menu for Khobzeh w Zaitoneh, Palestinian restaurant in Abu Dhabi." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="assets/images/menu-background.jpg" />
+    <meta property="og:image" content="assets/video/hero-poster.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     />
+    <link rel="icon" href="assets/images/logo-cropped.jpg" />
     <link rel="stylesheet" href="styles.css" />
     <script type="application/ld+json">
       {
@@ -43,23 +44,31 @@
       <div class="menu-header-bg" aria-hidden="true"></div>
       <div class="menu-header-inner">
         <a class="brand-lockup menu-brand" href="index.html" aria-label="Back to Khobzeh w Zaitoneh website">
-          <img src="assets/images/logo.jpg" alt="Khobzeh w Zaitoneh Arabic logo" />
+          <img class="brand-logo" src="assets/images/logo-cropped.jpg" alt="Khobzeh w Zaitoneh Arabic logo" />
           <span>
             <strong>Khobzeh w Zaitoneh</strong>
             <small lang="ar" dir="rtl">خبزة و زيتونة</small>
           </span>
         </a>
-        <div class="menu-title-block">
-          <p class="eyebrow">Digital Menu</p>
-          <h1>From our oven to your table</h1>
-          <p>
-            Palestinian dishes, warm bread, olive oil, pastries, daily plates, sweets, and drinks. Prices are listed in AED from the verified FineDine menu source.
-          </p>
-        </div>
-        <div class="menu-header-actions">
-          <a class="btn btn-light" href="index.html">Back to Website</a>
-          <a class="btn btn-outline-light" href="https://www.instagram.com/khobzehwzaitoneh/" target="_blank" rel="noopener">Instagram</a>
-          <a class="btn btn-outline-light" href="https://maps.app.goo.gl/xRNT1w5RNDVHsaGbA" target="_blank" rel="noopener">Get Directions</a>
+
+        <div class="menu-title-grid">
+          <div class="menu-title-block">
+            <p class="eyebrow">Digital Menu</p>
+            <h1>From our oven to your table</h1>
+            <p>
+              Palestinian dishes, warm bread, olive oil, pastries, daily plates, sweets, and drinks. Prices are listed in AED from the verified FineDine menu source.
+            </p>
+            <div class="menu-header-actions">
+              <a class="btn btn-light" href="index.html">Back to Website</a>
+              <a class="btn btn-outline-light" href="https://www.instagram.com/khobzehwzaitoneh/" target="_blank" rel="noopener">Instagram</a>
+              <a class="btn btn-outline-light" href="https://maps.app.goo.gl/xRNT1w5RNDVHsaGbA" target="_blank" rel="noopener">Get Directions</a>
+            </div>
+          </div>
+
+          <figure class="menu-hero-card arabic-frame">
+            <img src="assets/dishes/breakfast-tray.jpg" alt="Palestinian breakfast tray from the current menu" />
+            <figcaption>Verified menu prices are shown where available.</figcaption>
+          </figure>
         </div>
       </div>
     </header>
@@ -74,7 +83,7 @@
       </section>
 
       <section class="signature-section" aria-labelledby="signatureTitle">
-        <div class="section-intro section-intro-wide">
+        <div class="section-heading">
           <p class="eyebrow">Signature Palestinian Favourites</p>
           <h2 id="signatureTitle">Start here if you are choosing quickly</h2>
           <p>Selected from current menu items such as mansaf, musakhan, zaatar, breakfast trays, mezze, and Palestinian olive oil.</p>
@@ -91,9 +100,9 @@
           <p id="menuCount" aria-live="polite"></p>
         </div>
         <div id="menuSections" class="menu-sections"></div>
-        <p class="no-results" id="noResults" hidden>No menu items match your search.</p>
+        <p class="no-results arabic-frame" id="noResults" hidden>No menu items match your search.</p>
         <noscript>
-          <p class="no-results">JavaScript is required to display the full static menu dataset on this page.</p>
+          <p class="no-results arabic-frame">JavaScript is required to display the full static menu dataset on this page.</p>
         </noscript>
       </section>
     </main>
