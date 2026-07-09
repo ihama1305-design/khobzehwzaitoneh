@@ -154,6 +154,9 @@
   const searchInput = document.getElementById("menuSearch");
   const menuCount = document.getElementById("menuCount");
   const noResults = document.getElementById("noResults");
+  const quickFilterToggle = document.querySelector(".quick-filter-toggle");
+  const quickFilterContent = document.getElementById("quickFilterContent");
+  const quickFilterStatus = document.getElementById("quickFilterStatus");
 
   if (!sectionContainer || !categoryNav || !visualCategoryStrip || !signatureGrid || !searchInput) return;
 
@@ -207,6 +210,8 @@
   ];
 
   const openSections = new Set(sections[0]?.id ? [sections[0].id] : []);
+  let selectedQuickFilterLabel = "";
+  const mobileFilterQuery = window.matchMedia("(max-width: 768px)");
 
   const normalize = (value) =>
     String(value || "")
@@ -449,6 +454,39 @@
     });
   };
 
+  const setQuickFiltersOpen = (open) => {
+    if (!quickFilterToggle || !quickFilterContent) return;
+    quickFilterToggle.setAttribute("aria-expanded", String(open));
+    quickFilterContent.hidden = !open;
+  };
+
+  const updateQuickFilterStatus = (fallback = "Tap to browse categories") => {
+    if (!quickFilterStatus) return;
+    const query = normalize(searchInput.value);
+    if (query) {
+      quickFilterStatus.textContent = "Showing matching categories";
+      return;
+    }
+    quickFilterStatus.textContent = selectedQuickFilterLabel
+      ? `${selectedQuickFilterLabel} selected`
+      : fallback;
+  };
+
+  const selectQuickFilter = (label) => {
+    selectedQuickFilterLabel = label;
+    updateQuickFilterStatus();
+    if (mobileFilterQuery.matches) setQuickFiltersOpen(false);
+  };
+
+  if (quickFilterToggle && quickFilterContent) {
+    setQuickFiltersOpen(false);
+    quickFilterToggle.addEventListener("click", () => {
+      const isOpen = quickFilterToggle.getAttribute("aria-expanded") === "true";
+      setQuickFiltersOpen(!isOpen);
+      updateQuickFilterStatus(isOpen ? "Tap to browse categories" : "Choose a category");
+    });
+  }
+
   const renderCategoryNav = () => {
     categoryNav.replaceChildren();
     sectionGroups.forEach((group) => {
@@ -460,6 +498,7 @@
       button.dataset.groupId = group.id;
       button.addEventListener("click", () => {
         openGroupSections(group);
+        selectQuickFilter(group.name);
         renderMenu();
         scrollToTarget(group.id);
       });
@@ -475,6 +514,7 @@
       button.dataset.sectionId = section.id;
       button.addEventListener("click", () => {
         openSections.add(section.id);
+        selectQuickFilter(section.name);
         renderMenu();
         scrollToTarget(button.dataset.target);
       });
@@ -524,8 +564,10 @@
     button.addEventListener("click", () => {
       if (group) {
         openGroupSections(group);
+        selectQuickFilter(group.name);
       } else if (sectionId) {
         openSections.add(sectionId);
+        selectQuickFilter(label);
       }
       renderMenu();
       scrollToTarget(targetId);
@@ -699,6 +741,7 @@
       ? `${visibleCount} matching item${visibleCount === 1 ? "" : "s"}`
       : `${items.length} menu item${items.length === 1 ? "" : "s"} across ${sections.length} categories`;
     noResults.hidden = visibleCount > 0;
+    updateQuickFilterStatus(query ? "Showing matching categories" : "Tap to browse categories");
 
     [...categoryNav.querySelectorAll("button")].forEach((button) => {
       if (button.dataset.groupId) {

@@ -669,6 +669,19 @@ These are the newest collaborator notes and should be treated as active prioriti
 - If the local dataset says there are 220 items across 27 categories, verify that all 220 items and 27 categories actually render.
 - Latest local media pass attempted 244 FineDine media references. 68 were localized successfully and the remaining failed or unavailable media should render as intentional no-photo cards.
 
+## Latest Mobile Menu Fix
+
+- `menu.html` had mobile usability issues and must be tested at 375px, 390px, 430px, and 768px widths.
+- The search bar should be more rectangular/box-like, not a large rounded pill.
+- Quick category/search buttons should live inside a collapsible "Quick filters" panel.
+- On mobile, quick filters should be collapsed by default.
+- Category pills should be lighter, mostly white with green text and burgundy active state.
+- Dark green should be used less heavily; use white, charcoal, sage, burgundy, and subtle green shades for balance.
+- Menu accordions must work properly on mobile.
+- Search should automatically open categories containing matching items.
+- Menu cards must not create horizontal overflow on mobile.
+- No broken images should appear.
+
 # 15. Developer Rules
 
 Collaborators should follow these rules:
@@ -742,3 +755,18 @@ Collaborators should follow these rules:
 - [ ] Images are optimized.
 - [ ] Accessibility focus states are visible.
 - [ ] Reduced motion support exists.
+- [ ] `menu.html` works at 375px mobile width.
+- [ ] `menu.html` works at 390px mobile width.
+- [ ] `menu.html` works at 430px mobile width.
+- [ ] `menu.html` works at 768px tablet width.
+- [ ] No horizontal overflow appears on mobile.
+- [ ] Search bar is box-like, not overly pill-shaped.
+- [ ] Quick filters are collapsed by default on mobile.
+- [ ] Quick filter toggle opens and closes correctly.
+- [ ] Category pills are lighter and not all dark green.
+- [ ] Active category uses burgundy or another accent, not only dark green.
+- [ ] Accordions open/close correctly on mobile.
+- [ ] Search opens matching categories automatically.
+- [ ] Menu cards remain readable on mobile.
+- [ ] Prices remain visible on mobile.
+- [ ] Arabic text wraps correctly.
