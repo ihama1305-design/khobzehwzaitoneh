@@ -446,11 +446,12 @@ Important image rules:
 - Use `loading="lazy"` for non-critical images.
 - Keep image aspect ratios stable so cards do not jump or collapse while loading.
 
-Current critical image issue:
+Current image status:
 
-- Some menu and featured dish cards currently show broken image alt text instead of photos.
-- This must be treated as a blocker before launch.
-- The fix should localize/optimize images or add reliable local fallbacks so all cards display clean visuals on desktop, mobile, and in-app browsers.
+- Resolved locally on July 16, 2026: FineDine item and category photos are downloaded, optimized, and served from the repository rather than hotlinked at runtime.
+- 218 of 220 local menu items now have local photos; `Mix Sambousek` and `Tea pot Small` have no image in the current FineDine source and intentionally use no-photo cards.
+- 26 of 27 categories now have local photos; the `Soft Drinks` category has no FineDine category image and uses an item image as its visual-category fallback.
+- Broken image alt text remains a launch blocker if it reappears; all missing or failed media must continue to render intentional no-photo fallbacks.
 
 # 8. JavaScript Functionality
 
@@ -667,7 +668,7 @@ These are the newest collaborator notes and should be treated as active prioriti
 - The site should remain fully responsive for mobile, iPad, laptop, desktop, and large desktop.
 - Do not fabricate prices, reviews, photos, or restaurant facts.
 - If the local dataset says there are 220 items across 27 categories, verify that all 220 items and 27 categories actually render.
-- Latest local media pass attempted 244 FineDine media references. 68 were localized successfully and the remaining failed or unavailable media should render as intentional no-photo cards.
+- The July 16, 2026 local media pass covers 247 local menu entities: 244 have localized images (218 items and 26 categories), while two items and one category without FineDine source images render intentional no-photo fallbacks.
 
 ## Latest Mobile Menu Fix
 

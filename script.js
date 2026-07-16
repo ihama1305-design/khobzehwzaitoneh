@@ -664,10 +664,16 @@
     panel.id = panelId;
     panel.hidden = !expanded;
 
-    const grid = document.createElement("div");
-    grid.className = "menu-item-grid";
-    sectionItems.forEach((item) => grid.appendChild(createItemCard(item)));
-    panel.appendChild(grid);
+    const populatePanel = () => {
+      if (panel.dataset.populated === "true") return;
+      const grid = document.createElement("div");
+      grid.className = "menu-item-grid";
+      sectionItems.forEach((item) => grid.appendChild(createItemCard(item)));
+      panel.appendChild(grid);
+      panel.dataset.populated = "true";
+    };
+
+    if (expanded) populatePanel();
 
     headerEl.addEventListener("click", () => {
       const isExpanded = headerEl.getAttribute("aria-expanded") === "true";
@@ -678,6 +684,7 @@
         openSections.delete(section.id);
       } else {
         openSections.add(section.id);
+        populatePanel();
       }
     });
 
