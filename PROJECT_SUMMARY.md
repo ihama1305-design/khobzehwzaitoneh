@@ -14,6 +14,7 @@ Both pages are built with:
 - Vanilla JavaScript
 
 This project does not use React, Next.js, Tailwind, Bootstrap, or other heavy frameworks. Keep the site compatible with static hosting and GitHub Pages.
+GitHub Pages should publish the repository root directly as a static site. A `.nojekyll` file is included so the Pages pipeline does not try to process the site as a Jekyll project.
 
 # 2. Source Links
 
@@ -771,3 +772,10 @@ Collaborators should follow these rules:
 - [ ] Menu cards remain readable on mobile.
 - [ ] Prices remain visible on mobile.
 - [ ] Arabic text wraps correctly.
+
+# 17. Deployment Notes
+
+- GitHub Pages publishes the root as a plain static site.
+- Local preview should use a simple static server such as `python3 -m http.server 4173`.
+- Rollback should be done by reverting the release commit or restoring the previous saved version before republishing.
+- Keep `README.md` and this summary aligned whenever the site structure, preview steps, or deployment behavior changes.
