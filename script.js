@@ -44,17 +44,38 @@
   }
 
   if (navToggle && header && primaryNav) {
+    const closeNavigation = () => {
+      header.classList.remove("nav-open");
+      document.body.classList.remove("nav-active");
+      navToggle.setAttribute("aria-expanded", "false");
+    };
+
     navToggle.addEventListener("click", () => {
       const isOpen = header.classList.toggle("nav-open");
+      document.body.classList.toggle("nav-active", isOpen);
       navToggle.setAttribute("aria-expanded", String(isOpen));
     });
 
     primaryNav.addEventListener("click", (event) => {
       if (event.target.matches("a")) {
-        header.classList.remove("nav-open");
-        navToggle.setAttribute("aria-expanded", "false");
+        closeNavigation();
       }
     });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && header.classList.contains("nav-open")) {
+        closeNavigation();
+        navToggle.focus();
+      }
+    });
+
+    document.addEventListener("pointerdown", (event) => {
+      if (header.classList.contains("nav-open") && !header.contains(event.target)) closeNavigation();
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1024) closeNavigation();
+    }, { passive: true });
   }
 
   document.querySelectorAll("[data-autoplay-video]").forEach((video) => {
@@ -812,5 +833,9 @@
   renderSignatures();
   renderMenu();
 
-  searchInput.addEventListener("input", renderMenu);
+  let searchRenderFrame;
+  searchInput.addEventListener("input", () => {
+    window.cancelAnimationFrame(searchRenderFrame);
+    searchRenderFrame = window.requestAnimationFrame(renderMenu);
+  });
 })();
